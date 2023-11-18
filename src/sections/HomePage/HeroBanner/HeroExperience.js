@@ -151,7 +151,6 @@ function HeroExperience() {
     };
   }, []);
 
-  console.log("called");
 
   return (
     <Box

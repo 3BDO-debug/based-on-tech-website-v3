@@ -29,7 +29,7 @@ function HeroBanner() {
         pb: 10,
       }}
     >
-      <HeroExperience />
+      {typeof window !== "undefined" && <HeroExperience />}
       {/* Hero Overlay */}
       <Box
         sx={{
