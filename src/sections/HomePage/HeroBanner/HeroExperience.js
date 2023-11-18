@@ -116,19 +116,6 @@ const SceneLoadingIndicator = () => {
   return null;
 };
 
-function DrawCallCounter() {
-  const { gl } = useThree();
-  const [drawCalls, setDrawCalls] = useState(0);
-
-  useFrame(() => {
-    setDrawCalls(gl.info.render.calls); // This gives you the number of draw calls
-  });
-
-  console.log("draw calls", drawCalls);
-
-  return null; // Display it in your UI
-}
-
 // ----------------------------------------------------------------------
 
 function HeroExperience() {
@@ -138,7 +125,7 @@ function HeroExperience() {
 
   const [dpr, setDpr] = useState(1.5);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: false });
   renderer.gammaOutput = true; // set gammaOutput to true
   renderer.gammaFactor = 2.2;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -155,20 +142,60 @@ function HeroExperience() {
     hidden: { opacity: 0, scale: 0, transition: { duration: 0.5 } },
   };
 
+  const [memoryUsage, setMemoryUsage] = useState({
+    usedJSHeapSize: 0,
+    totalJSHeapSize: 0,
+  });
+
+  // Function to monitor memory usage
+  const monitorMemory = () => {
+    if (window.performance && window.performance.memory) {
+      setMemoryUsage({
+        usedJSHeapSize: window.performance.memory.usedJSHeapSize,
+        totalJSHeapSize: window.performance.memory.totalJSHeapSize,
+      });
+    }
+  };
+
+  // Effect to start monitoring memory usage
+  useEffect(() => {
+    const memoryMonitorInterval = setInterval(monitorMemory, 10000); // every 10 seconds
+    return () => clearInterval(memoryMonitorInterval);
+  }, []);
+
+  // Handle WebGL context restoration
+  const handleContextRestored = () => {
+    console.log("WebGL context restored.");
+    // Implement any logic needed after context restoration
+  };
+
+  // Update handleContextLost to include additional logic
   const handleContextLost = (event) => {
     event.preventDefault();
     console.log("WebGL context lost. Attempting to restore...");
 
-    // Attempt to restore the context (browser dependent)
+    // Implement logic for reducing resource usage here
+    // Provide user feedback here
+
     canvasRef.current.getContext("webgl").restoreContext();
   };
 
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.addEventListener("webglcontextlost", handleContextLost, false);
+    canvas.addEventListener(
+      "webglcontextrestored",
+      handleContextRestored,
+      false
+    );
 
     return () => {
       canvas.removeEventListener("webglcontextlost", handleContextLost, false);
+      canvas.removeEventListener(
+        "webglcontextrestored",
+        handleContextRestored,
+        false
+      );
     };
   }, []);
 
@@ -201,10 +228,9 @@ function HeroExperience() {
         >
           <PerformanceMonitor
             factor={1}
-            onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}
+            onChange={({ factor }) => setDpr(Math.round(0.5 + 1.5 * factor, 1))}
           />
 
-          <DrawCallCounter />
           <Stats />
           <CameraDev controlsRef={controlsRef} />
           <OrbitControls
@@ -218,7 +244,7 @@ function HeroExperience() {
           <ambientLight intensity={3} />
           <StarsEffect isMobile={isMobile} />
           {/* 3D Model */}
-          <Suspense fallback={<SceneLoadingIndicator />}>
+          <Suspense fallback={<>Loading room model</>}>
             <RoomModel isMobile={isMobile} />
           </Suspense>
           {/* End 3D Model */}
