@@ -1,12 +1,17 @@
 "use client";
 import React from "react";
+// Next
+import dynamic from "next/dynamic";
 // @Mui
 import { Box, Button, Container, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-//
-import ContactUsExperience from "./ContactUsExperience";
 
 // ----------------------------------------------------------------------
+
+const ContactUsExperience = dynamic(() => import("./ContactUsExperience"), {
+  ssr: false,
+  loading: () => <p>Loading 3D Website...</p>, // Optional loading component
+});
 
 function ContactUs() {
   return (

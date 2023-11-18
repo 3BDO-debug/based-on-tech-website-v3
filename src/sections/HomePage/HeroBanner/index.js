@@ -2,6 +2,7 @@
 import React from "react";
 // Next
 import Image from "next/image";
+import dynamic from "next/dynamic";
 // @Mui
 import { Box, Container, Grid, useTheme } from "@mui/material";
 // Recoil
@@ -12,9 +13,13 @@ import { exploreHeroModelAtom } from "@/recoil/atoms";
 import sectionOverlay from "@/assets/section-overlay.jpg";
 //
 import HeroContent from "./HeroContent";
-import HeroExperience from "./HeroExperience";
 
 // ----------------------------------------------------------------------------
+
+const HeroExperience = dynamic(() => import("./HeroExperience"), {
+  ssr: false,
+  loading: () => <p>Loading 3D Website...</p>, // Optional loading component
+});
 
 function HeroBanner() {
   const exploreHeroModel = useRecoilValue(exploreHeroModelAtom);

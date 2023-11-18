@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from "react";
 // @Mui
 import { Box, LinearProgress, Typography, useTheme } from "@mui/material";
@@ -16,8 +17,6 @@ import experienceLoader from "@/assets/animations/3d-experience-loader.json";
 
 function ModelLoadingScreen() {
   const theme = useTheme();
-
-  console.log("viewport height", window.innerHeight);
 
   const heroBannerSceneLoading = useRecoilValue(heroBannerSceneLoadingAtom);
   return !heroBannerSceneLoading.loaded ? (

@@ -1,12 +1,18 @@
 "use client";
 import React from "react";
+// Next
+import dynamic from "next/dynamic";
 // @Mui
 import { Box, Container, Grid } from "@mui/material";
 //
 import PortfolioIntro from "./PortfolioIntro";
-import PortfolioExperience from "./PortfolioExperience";
 
 // ----------------------------------------------------------------------------------------------------------
+
+const PortfolioExperience = dynamic(() => import("./PortfolioExperience"), {
+  ssr: false,
+  loading: () => <p>Loading 3D Website...</p>, // Optional loading component
+});
 
 function PortfolioOverview() {
   return (

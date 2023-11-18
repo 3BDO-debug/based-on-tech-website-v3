@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef } from "react";
 // React Three Fibers
 import { Canvas, useFrame } from "@react-three/fiber";
