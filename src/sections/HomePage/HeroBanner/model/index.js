@@ -70,7 +70,7 @@ function RoomModel({ isMobile, ...props }) {
 
   // Animate the position on each frame
   useFrame(() => {
-    if (group.current) {
+    if (group.current && !isMobile) {
       // Interpolate current position with the target position for smooth animation
       group.current.position.lerp(
         new THREE.Vector3(0, targetY.current, 0),
