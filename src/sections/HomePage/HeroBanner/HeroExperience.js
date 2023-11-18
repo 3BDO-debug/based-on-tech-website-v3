@@ -37,10 +37,12 @@ import ModelLoadingScreen from "../../../components/ModelLoadingScreen";
 
 // ----------------------------------------------------------------------
 
-const StarsEffect = () => {
+const StarsEffect = ({ isMobile }) => {
   const ref = useRef();
   useFrame(({ clock }) => {
-    ref.current.rotation.y = clock.getElapsedTime() / 40;
+    if (!isMobile) {
+      ref.current.rotation.y = clock.getElapsedTime() / 40;
+    }
   });
 
   return <Stars ref={ref} />;
@@ -93,8 +95,6 @@ const SceneLoadingIndicator = () => {
   const [heroBannerSceneLoading, setHeroBannerSceneLoading] = useRecoilState(
     heroBannerSceneLoadingAtom
   );
-
-  console.log("aa", errors);
 
   useEffect(() => {
     // Update the Recoil atom with the current progress and loaded state
@@ -167,7 +167,7 @@ function HeroExperience() {
             maxAzimuthAngle={Math.PI / 2} // radians
           />
           <ambientLight intensity={3} />
-          <StarsEffect />
+          <StarsEffect isMobile={isMobile} />
           {/* 3D Model */}
           <Suspense fallback={<SceneLoadingIndicator />}>
             <RoomModel isMobile={isMobile} />
