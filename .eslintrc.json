@@ -1,3 +1,12 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/babel", "next/core-web-vitals"],
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        // Add your rules here
+      }
+    }
+  ]
 }
