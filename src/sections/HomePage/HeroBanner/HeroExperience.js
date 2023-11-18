@@ -5,7 +5,13 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 // Recoil
 import { useRecoilState } from "recoil";
 // React Three Drei
-import { OrbitControls, Stars, useProgress } from "@react-three/drei";
+import {
+  OrbitControls,
+  PerformanceMonitor,
+  Stars,
+  Stats,
+  useProgress,
+} from "@react-three/drei";
 // Threejs
 import * as THREE from "three";
 // Framer
@@ -110,12 +116,27 @@ const SceneLoadingIndicator = () => {
   return null;
 };
 
+function DrawCallCounter() {
+  const { gl } = useThree();
+  const [drawCalls, setDrawCalls] = useState(0);
+
+  useFrame(() => {
+    setDrawCalls(gl.info.render.calls); // This gives you the number of draw calls
+  });
+
+  console.log("draw calls", drawCalls);
+
+  return null; // Display it in your UI
+}
+
 // ----------------------------------------------------------------------
 
 function HeroExperience() {
   const theme = useTheme();
 
   const canvasRef = useRef();
+
+  const [dpr, setDpr] = useState(1.5);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.gammaOutput = true; // set gammaOutput to true
@@ -151,7 +172,6 @@ function HeroExperience() {
     };
   }, []);
 
-
   return (
     <Box
       sx={{
@@ -166,7 +186,8 @@ function HeroExperience() {
       <Suspense fallback={<>Loading 3d scene</>}>
         <Canvas
           ref={canvasRef}
-          pixelratio={window.devicePixelRatio}
+          pixelratio={1}
+          dpr={dpr}
           style={{
             backgroundColor: theme.palette.background.default,
             zIndex: 1,
@@ -178,6 +199,13 @@ function HeroExperience() {
           }}
           linear
         >
+          <PerformanceMonitor
+            factor={1}
+            onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}
+          />
+
+          <DrawCallCounter />
+          <Stats />
           <CameraDev controlsRef={controlsRef} />
           <OrbitControls
             ref={controlsRef}
