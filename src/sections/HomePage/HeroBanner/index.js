@@ -13,13 +13,9 @@ import { exploreHeroModelAtom } from "@/recoil/atoms";
 import sectionOverlay from "@/assets/section-overlay.jpg";
 //
 import HeroContent from "./HeroContent";
+import HeroExperience from "./HeroExperience";
 
 // ----------------------------------------------------------------------------
-
-const HeroExperience = dynamic(() => import("./HeroExperience"), {
-  ssr: false,
-  loading: () => <p>Loading 3D Website...</p>, // Optional loading component
-});
 
 function HeroBanner() {
   const exploreHeroModel = useRecoilValue(exploreHeroModelAtom);

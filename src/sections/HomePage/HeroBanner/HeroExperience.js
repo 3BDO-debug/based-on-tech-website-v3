@@ -115,6 +115,8 @@ const SceneLoadingIndicator = () => {
 function HeroExperience() {
   const theme = useTheme();
 
+  const canvasRef = useRef();
+
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.gammaOutput = true; // set gammaOutput to true
   renderer.gammaFactor = 2.2;
@@ -132,6 +134,25 @@ function HeroExperience() {
     hidden: { opacity: 0, scale: 0, transition: { duration: 0.5 } },
   };
 
+  const handleContextLost = (event) => {
+    event.preventDefault();
+    console.log("WebGL context lost. Attempting to restore...");
+
+    // Attempt to restore the context (browser dependent)
+    canvasRef.current.getContext("webgl").restoreContext();
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    canvas.addEventListener("webglcontextlost", handleContextLost, false);
+
+    return () => {
+      canvas.removeEventListener("webglcontextlost", handleContextLost, false);
+    };
+  }, []);
+
+  console.log("called");
+
   return (
     <Box
       sx={{
@@ -145,6 +166,7 @@ function HeroExperience() {
       {/* End Model Loading Screen */}
       <Suspense fallback={<>Loading 3d scene</>}>
         <Canvas
+          ref={canvasRef}
           pixelratio={window.devicePixelRatio}
           style={{
             backgroundColor: theme.palette.background.default,
