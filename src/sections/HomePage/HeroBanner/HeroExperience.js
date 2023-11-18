@@ -94,6 +94,8 @@ const SceneLoadingIndicator = () => {
     heroBannerSceneLoadingAtom
   );
 
+  console.log("aa", errors);
+
   useEffect(() => {
     // Update the Recoil atom with the current progress and loaded state
     setHeroBannerSceneLoading((current) => ({
@@ -143,7 +145,7 @@ function HeroExperience() {
       {/* End Model Loading Screen */}
       <Suspense fallback={<>Loading 3d scene</>}>
         <Canvas
-          pixelratio={3.0}
+          pixelratio={window.devicePixelRatio}
           style={{
             backgroundColor: theme.palette.background.default,
             zIndex: 1,
