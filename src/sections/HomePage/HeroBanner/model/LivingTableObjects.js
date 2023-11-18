@@ -12,7 +12,7 @@ function LivingTableObjects(props) {
   const texture = useTexture("/textures/living-table-objects.jpg");
   texture.flipY = false;
 
-  const controllerMaterial = new THREE.MeshStandardMaterial({
+  /*   const controllerMaterial = new THREE.MeshStandardMaterial({
     color: "#ffffff",
     roughness: 12,
   });
@@ -26,14 +26,14 @@ function LivingTableObjects(props) {
     color: "#00ffcc",
     emissiveIntensity: 9,
   });
-
+ */
   const material = new THREE.MeshStandardMaterial({
     map: texture,
   });
 
   return (
     <group>
-      <group
+      {/*    <group
         name="Dualsense_controller_PS5"
         position={[0.154, 0.461, 0.842]}
         rotation={[-Math.PI, 1.064, -Math.PI]}
@@ -118,7 +118,7 @@ function LivingTableObjects(props) {
           position={[0, 0.043, 0.002]}
           rotation={[-0.209, 0, 0]}
         />
-      </group>
+      </group> */}
       <group
         name="Water_bottle"
         position={[-0.314, 0.461, 0.562]}
