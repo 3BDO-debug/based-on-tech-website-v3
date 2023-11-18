@@ -168,18 +168,20 @@ function HeroExperience() {
             <RoomModel isMobile={isMobile} />
           </Suspense>
           {/* End 3D Model */}
-          <EffectComposer>
-            <BrightnessContrast
-              brightness={0.05} // brightness. min: -1, max: 1
-              contrast={0.1} // contrast: min -1, max: 1
-            />
-            <Bloom
-              luminanceThreshold={1}
-              luminanceSmoothing={0.1}
-              intensity={0.13}
-              opacity={1}
-            />
-          </EffectComposer>
+          {!isMobile && (
+            <EffectComposer>
+              <BrightnessContrast
+                brightness={0.05} // brightness. min: -1, max: 1
+                contrast={0.1} // contrast: min -1, max: 1
+              />
+              <Bloom
+                luminanceThreshold={1}
+                luminanceSmoothing={0.1}
+                intensity={0.13}
+                opacity={1}
+              />
+            </EffectComposer>
+          )}
         </Canvas>
       </Suspense>
       {/* Click To Explore */}
