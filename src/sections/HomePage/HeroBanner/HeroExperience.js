@@ -270,7 +270,7 @@ function HeroExperience() {
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          zIndex: 10,
+          zIndex: 10000,
           position: "absolute",
           bottom: "5vh",
         }}
