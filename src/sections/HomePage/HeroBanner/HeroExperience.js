@@ -151,7 +151,10 @@ function HeroExperience() {
             zIndex: 1,
             height: "100vh",
           }}
-          gl={{ antialias: true, toneMapping: THREE.LinearToneMapping }}
+          gl={{
+            antialias: isMobile ? false : true,
+            toneMapping: THREE.LinearToneMapping,
+          }}
           linear
         >
           <CameraDev controlsRef={controlsRef} />
