@@ -83,69 +83,7 @@ function RoomModel({ isMobile, ...props }) {
     setHeroBannerSceneLoading({ progress: 100, loaded: true });
   }, []);
 
-  return (
-    <group ref={group} {...props} dispose={null}>
-      <group name="Scene">
-        {/* Lights & Window */}
-        <LightsWindow nodes={nodes} />
-        {/* End Lights & Window */}
-
-        {/* Living Table Objects */}
-        <LivingTableObjects nodes={nodes} />
-        {/* End Living Table Objects */}
-
-        {/* Tv Monitor */}
-        <MonitorTv nodes={nodes} />
-        {/* End Tv Monitor */}
-
-        {/* Newton Craddle */}
-        <NewtonCraddle nodes={nodes} />
-        {/* End Newton Craddle */}
-
-        {/* Creative Word */}
-        <CreativeWord nodes={nodes} />
-        {/* End Creative Word */}
-
-        {/* World Ground */}
-        <WorldGround nodes={nodes} />
-        {/* End World Ground */}
-
-        {/* DMC Car Model */}
-        <CarModel nodes={nodes} />
-        {/* End DMC Car Model */}
-
-        {/* Room Structure */}
-        <RoomStructure nodes={nodes} />
-        {/* End Room Structure */}
-
-        {/* Ikea Desk */}
-
-        <IkeaDesk nodes={nodes} />
-
-        {/* End Ikea Desk */}
-
-        {/* Room Decorations */}
-        <RoomDecorations nodes={nodes} materials={materials} />
-        {/* End Room Decorations */}
-
-        {/* Living Furniture */}
-        <LivingFurniture nodes={nodes} />
-        {/* End Living Furniture */}
-
-        {/* Gaming Setup */}
-        <GamingSetup nodes={nodes} />
-        {/* End Gaming Setup */}
-
-        {/* Painting Frames */}
-        <PaintingFrames nodes={nodes} />
-        {/* End Painting Frames */}
-
-        {/* Rubik Cube */}
-        <RubikCube nodes={nodes} />
-        {/* Rubiks Cube */}
-      </group>
-    </group>
-  );
+  return <group ref={group} {...props} dispose={null}></group>;
 }
 
 export default RoomModel;

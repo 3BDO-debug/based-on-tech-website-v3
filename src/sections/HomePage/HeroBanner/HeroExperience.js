@@ -38,8 +38,10 @@ import {
   heroBannerSceneLoadingAtom,
 } from "@/recoil/atoms";
 //
-import RoomModel from "./model";
+import RoomModel from "./models/RoomModel";
 import ModelLoadingScreen from "../../../components/ModelLoadingScreen";
+import DetailedObjects from "./models/DetailedObjects";
+import RubiksCube from "./models/RubiksCube";
 
 // ----------------------------------------------------------------------
 
@@ -216,7 +218,7 @@ function HeroExperience() {
           pixelratio={1}
           dpr={dpr}
           style={{
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: theme.palette.background.default || "black",
             zIndex: 1,
             height: "100vh",
           }}
@@ -245,7 +247,13 @@ function HeroExperience() {
           <StarsEffect isMobile={isMobile} />
           {/* 3D Model */}
           <Suspense fallback={<>Loading room model</>}>
-            <RoomModel isMobile={isMobile} />
+            <RoomModel />
+          </Suspense>
+          <Suspense fallback={<>detailed objects</>}>
+            <DetailedObjects />
+          </Suspense>
+          <Suspense>
+            <RubiksCube />
           </Suspense>
           {/* End 3D Model */}
           {!isMobile && (
