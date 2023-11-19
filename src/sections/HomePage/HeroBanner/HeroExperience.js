@@ -144,27 +144,6 @@ function HeroExperience() {
     hidden: { opacity: 0, scale: 0, transition: { duration: 0.5 } },
   };
 
-  const [memoryUsage, setMemoryUsage] = useState({
-    usedJSHeapSize: 0,
-    totalJSHeapSize: 0,
-  });
-
-  // Function to monitor memory usage
-  const monitorMemory = () => {
-    if (window.performance && window.performance.memory) {
-      setMemoryUsage({
-        usedJSHeapSize: window.performance.memory.usedJSHeapSize,
-        totalJSHeapSize: window.performance.memory.totalJSHeapSize,
-      });
-    }
-  };
-
-  // Effect to start monitoring memory usage
-  useEffect(() => {
-    const memoryMonitorInterval = setInterval(monitorMemory, 10000); // every 10 seconds
-    return () => clearInterval(memoryMonitorInterval);
-  }, []);
-
   // Handle WebGL context restoration
   const handleContextRestored = () => {
     console.log("WebGL context restored.");
@@ -233,7 +212,6 @@ function HeroExperience() {
             onChange={({ factor }) => setDpr(Math.round(0.5 + 1.5 * factor, 1))}
           />
 
-          <Stats />
           <CameraDev controlsRef={controlsRef} />
           <OrbitControls
             ref={controlsRef}
