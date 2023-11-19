@@ -199,7 +199,7 @@ function HeroExperience() {
         false
       );
     };
-  }, []);
+  }, [canvasRef]);
 
   return (
     <Box
