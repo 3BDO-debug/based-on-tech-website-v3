@@ -46,7 +46,7 @@ const ServiceCard = ({ animaiton, title, reverseLayout, description }) => {
       justifyContent="space-between"
     >
       <Grid2 xs={12} md={6}>
-        {inView && <Lottie animationData={animaiton} />}
+        <Lottie animationData={animaiton} />
       </Grid2>
       <Grid2 xs={12} md={5}>
         <Box
