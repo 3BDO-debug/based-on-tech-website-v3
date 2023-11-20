@@ -38,10 +38,11 @@ import {
   heroBannerSceneLoadingAtom,
 } from "@/recoil/atoms";
 //
-import RoomModel from "./models/RoomModel";
 import ModelLoadingScreen from "../../../components/ModelLoadingScreen";
-import DetailedObjects from "./models/DetailedObjects";
 import RubiksCube from "./models/RubiksCube";
+import BasicSceneModel from "./models/BasicSceneModel";
+import RoomSetup from "./models/RoomSetup";
+import NewtonCraddles from "./models/NewtonCraddles";
 
 // ----------------------------------------------------------------------
 
@@ -221,17 +222,20 @@ function HeroExperience() {
             minAzimuthAngle={-Math.PI / 4} // radians
             maxAzimuthAngle={Math.PI / 2} // radians
           />
-          <ambientLight intensity={3} />
+          <ambientLight intensity={4} />
           <StarsEffect isMobile={isMobile} />
           {/* 3D Model */}
           <Suspense fallback={<>Loading room model</>}>
-            <RoomModel />
-          </Suspense>
-          <Suspense fallback={<>detailed objects</>}>
-            <DetailedObjects />
+            <BasicSceneModel />
           </Suspense>
           <Suspense>
+            <RoomSetup />
+          </Suspense>
+          <Suspense fallback={<>Loading rubiks cube</>}>
             <RubiksCube />
+          </Suspense>
+          <Suspense fallback={<>Loading model</>}>
+            <NewtonCraddles />
           </Suspense>
           {/* End 3D Model */}
           {!isMobile && (
