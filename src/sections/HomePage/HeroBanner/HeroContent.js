@@ -94,14 +94,17 @@ function HeroContent() {
               },
             }}
           >
-            <Typography color="grey.400" variant="subtitle1">
+            <Typography
+              color="grey.400"
+              variant={isMobile ? "subtitle2" : "subtitle1"}
+            >
               Welcome To Our Creative World.
             </Typography>
           </Box>
         </Grid>
         <Grid item xs={12}>
           <Typography
-            variant="h1"
+            variant={isMobile ? "h2" : "h1"}
             align={isMobile ? "center" : "left"}
             color="grey.100"
             sx={{ mb: 2 }}
@@ -123,7 +126,7 @@ function HeroContent() {
                 }}
               />
               <Typography
-                variant="h1"
+                variant={isMobile ? "h2" : "h1"}
                 sx={{
                   background: "linear-gradient(to right, #7675FD, #40FFEF)",
                   WebkitBackgroundClip: "text",
@@ -138,7 +141,10 @@ function HeroContent() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography align={isMobile ? "center" : "left"}>
+          <Typography
+            variant={isMobile ? "body2" : "body1"}
+            align={isMobile ? "center" : "left"}
+          >
             <strong>Based On Tech</strong>: Empowering success through creative
             software solutions, transforming ideas into impactful business
             innovations
@@ -161,12 +167,14 @@ function HeroContent() {
               sx={{ mr: 2 }}
               variant="outlined"
               onClick={() => router.push("/about-us")}
-              size="large"
+              size={isMobile ? "small" : "large"}
             >
-              <Typography variant="h6">Learn More</Typography>
+              <Typography variant={isMobile ? "subtitle1" : "h6"}>
+                Learn More
+              </Typography>
             </Button>
             <Button
-              size="large"
+              size={isMobile ? "small" : "large"}
               endIcon={<Icon icon="ion:rocket-outline" />}
               variant="contained"
               onClick={() => triggerStartProjectPopUp(true)}

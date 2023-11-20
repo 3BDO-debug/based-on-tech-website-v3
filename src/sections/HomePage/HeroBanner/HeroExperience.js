@@ -116,14 +116,6 @@ function HeroExperience() {
 
   const controlsRef = useRef();
 
-  const [exploreModel, triggerExploreModel] =
-    useRecoilState(exploreHeroModelAtom);
-
-  const buttonVariants = {
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-    hidden: { opacity: 0, scale: 0, transition: { duration: 0.5 } },
-  };
-
   // Handle WebGL context restoration
   const handleContextRestored = () => {
     console.log("WebGL context restored.");
