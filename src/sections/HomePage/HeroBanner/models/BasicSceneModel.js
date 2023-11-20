@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 // React three drei
 import { useGLTF, useTexture } from "@react-three/drei";
 // Three js
 import * as THREE from "three";
+// recoil
+import { useSetRecoilState } from "recoil";
+// atoms
+import { heroBannerSceneLoadingAtom } from "@/recoil/atoms";
 
 // --------------------------------------------------------------------------------
 
@@ -11,6 +15,11 @@ function BasicSceneModel(props) {
 
   const basicSceneTexture = useTexture("/textures/room-scene/basic-scene.jpg");
   basicSceneTexture.flipY = false;
+
+  const basicSceneLightmap = useTexture(
+    "/textures/room-scene/basic-scene-lightmap.jpg"
+  );
+  basicSceneLightmap.flipY = false;
 
   const basicSceneMaterial = new THREE.MeshBasicMaterial({
     map: basicSceneTexture,
@@ -22,6 +31,14 @@ function BasicSceneModel(props) {
     emissiveIntensity: 10,
     toneMapped: false,
   });
+
+  const setheroBannerModelLoaded = useSetRecoilState(
+    heroBannerSceneLoadingAtom
+  );
+
+  useEffect(() => {
+    setheroBannerModelLoaded({ loaded: true, progress: 100 });
+  }, []);
 
   return (
     <group {...props} dispose={null}>

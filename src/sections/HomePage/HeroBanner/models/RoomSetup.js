@@ -249,8 +249,14 @@ function RoomSetup(props) {
           scale={0.019}
         />
         <mesh
+          geometry={nodes.Cube006.geometry}
+          material={roomSetupMaterial}
+          position={[0, 0.021, 0]}
+          scale={0.091}
+        />
+        <mesh
           geometry={nodes.Text003.geometry}
-          material={nodes.Text003.material}
+          material={roomSetupMaterial}
           position={[-0.044, 0.055, -0.024]}
           rotation={[0.092, 0, 0]}
           scale={0.019}

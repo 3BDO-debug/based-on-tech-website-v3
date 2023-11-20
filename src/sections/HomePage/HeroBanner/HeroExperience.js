@@ -54,7 +54,7 @@ const StarsEffect = ({ isMobile }) => {
     }
   });
 
-  return <Stars ref={ref} />;
+  return <Stars ref={ref} count={isMobile ? 1000 : 7000} />;
 };
 
 const CameraDev = ({ controlsRef }) => {
@@ -96,27 +96,6 @@ const CameraDev = ({ controlsRef }) => {
   }, [camera, isMobile, controlsRef]);
 
   return <></>;
-};
-
-const SceneLoadingIndicator = () => {
-  const { active, progress, errors, item, loaded, total } = useProgress();
-
-  const [heroBannerSceneLoading, setHeroBannerSceneLoading] = useRecoilState(
-    heroBannerSceneLoadingAtom
-  );
-
-  useEffect(() => {
-    // Update the Recoil atom with the current progress and loaded state
-    setHeroBannerSceneLoading((current) => ({
-      ...current,
-      loaded: false, // Set to true when the model is fully loaded
-      progress: progress,
-    }));
-
-    // Log the progress and active state for debugging
-  }, [progress, active, setHeroBannerSceneLoading]);
-
-  return null;
 };
 
 // ----------------------------------------------------------------------
@@ -195,7 +174,7 @@ function HeroExperience() {
       <Suspense fallback={<>Loading 3d scene</>}>
         <Canvas
           ref={canvasRef}
-          pixelratio={1}
+          pixelratio={isMobile ? 1 : 3}
           dpr={dpr}
           style={{
             backgroundColor: theme.palette.background.default || "black",
@@ -212,7 +191,6 @@ function HeroExperience() {
             factor={1}
             onChange={({ factor }) => setDpr(Math.round(0.5 + 1.5 * factor, 1))}
           />
-
           <CameraDev controlsRef={controlsRef} />
           <OrbitControls
             ref={controlsRef}
@@ -222,7 +200,6 @@ function HeroExperience() {
             minAzimuthAngle={-Math.PI / 4} // radians
             maxAzimuthAngle={Math.PI / 2} // radians
           />
-          <ambientLight intensity={4} />
           <StarsEffect isMobile={isMobile} />
           {/* 3D Model */}
           <Suspense fallback={<>Loading room model</>}>
@@ -254,6 +231,7 @@ function HeroExperience() {
           )}
         </Canvas>
       </Suspense>
+
       {/* Click To Explore */}
       <Box
         sx={{
@@ -264,43 +242,7 @@ function HeroExperience() {
           position: "absolute",
           bottom: "5vh",
         }}
-      >
-        {exploreModel ? (
-          <motion.div
-            key="closeButton"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={buttonVariants}
-          >
-            <IconButton onClick={() => triggerExploreModel(false)}>
-              <Icon
-                color={theme.palette.error.light}
-                width={60}
-                height={60}
-                icon="solar:close-circle-broken"
-              />
-            </IconButton>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="exploreButton"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={buttonVariants}
-          >
-            <Button
-              size="large"
-              variant="outlined"
-              startIcon={<Icon icon="icon-park-outline:click-tap" />}
-              onClick={() => triggerExploreModel(true)}
-            >
-              Click To Explore
-            </Button>
-          </motion.div>
-        )}
-      </Box>
+      ></Box>
     </Box>
   );
 }

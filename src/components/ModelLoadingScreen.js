@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 // @Mui
-import { Box, LinearProgress, Typography, useTheme } from "@mui/material";
-// Iconify
-import { Icon } from "@iconify/react";
+import { Box, Typography, useTheme } from "@mui/material";
 // recoil
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 // atoms
 import { heroBannerSceneLoadingAtom } from "@/recoil/atoms";
 // Lottie
@@ -58,29 +56,6 @@ function ModelLoadingScreen() {
         >
           Creative 3D Web Experience Is Loading.
         </Typography>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-          justifyContent: "center",
-          px: "4vw",
-        }}
-      >
-        <Box sx={{ width: "50%", mr: 2 }}>
-          <LinearProgress
-            variant="determinate"
-            value={heroBannerSceneLoading.progress}
-          />
-        </Box>
-        <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body1" color="text.primary">{`${parseInt(
-            heroBannerSceneLoading.progress,
-            10
-          )}%`}</Typography>
-        </Box>
       </Box>
     </Box>
   ) : (

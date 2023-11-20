@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
             <StartProjectPopUp />
             {/* End start project pop up */}
             {/* Home page 3d model loader */}
-            {/*  {pathname === "/" && <ModelLoadingScreen />} */}
+            {pathname === "/" && <ModelLoadingScreen />}
           </Box>
         </RootStyleRegistry>
       </body>
