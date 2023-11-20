@@ -177,7 +177,7 @@ function HeroExperience() {
           pixelratio={isMobile ? 1 : 3}
           dpr={dpr}
           style={{
-            backgroundColor: theme.palette.background.default || "black",
+            backgroundColor: "#161C24",
             zIndex: 1,
             height: "100vh",
           }}

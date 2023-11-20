@@ -1,12 +1,25 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Next
 import Image from "next/image";
 import dynamic from "next/dynamic";
+// React Intersection Observer
+import { useInView } from "react-intersection-observer"; // framer
+// framer
+import { motion } from "framer-motion";
 // @Mui
-import { Box, Container, Grid, useTheme } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  useTheme,
+  Button,
+  IconButton,
+} from "@mui/material";
+// Iconify
+import { Icon } from "@iconify/react";
 // Recoil
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 // atoms
 import { exploreHeroModelAtom } from "@/recoil/atoms";
 // assets
@@ -22,7 +35,21 @@ const HeroExperience = dynamic(() => import("./HeroExperience"), {
 });
 
 function HeroBanner() {
-  const exploreHeroModel = useRecoilValue(exploreHeroModelAtom);
+  const theme = useTheme();
+
+  const sectionRef = useRef();
+
+  const [exploreHeroModel, triggerExploreModel] =
+    useRecoilState(exploreHeroModelAtom);
+
+  const [scrolledAway, setIsScrolledAway] = useState(false);
+
+  const buttonVariants = {
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, scale: 0, transition: { duration: 0.5 } },
+  };
+
+  const { ref, inView } = useInView();
 
   return (
     <Box
@@ -32,8 +59,9 @@ function HeroBanner() {
         overflow: "hidden",
         pb: 10,
       }}
+      ref={ref}
     >
-      <HeroExperience />
+      {inView && <HeroExperience />}
       {/* Hero Overlay */}
       <Box
         sx={{
@@ -74,6 +102,56 @@ function HeroBanner() {
           <HeroContent />
         </Box>
       )}
+
+      {/* Click To Explore */}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          zIndex: 10000,
+          position: !inView ? "sticky" : "fixed",
+          bottom: "0vh",
+          height: "10vh",
+        }}
+      >
+        {exploreHeroModel ? (
+          <motion.div
+            key="closeButton"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={buttonVariants}
+          >
+            <IconButton onClick={() => triggerExploreModel(false)}>
+              <Icon
+                color={theme.palette.error.light}
+                width={60}
+                height={60}
+                icon="solar:close-circle-broken"
+              />
+            </IconButton>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="exploreButton"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={buttonVariants}
+          >
+            <Button
+              size="large"
+              variant="outlined"
+              startIcon={<Icon icon="icon-park-outline:click-tap" />}
+              onClick={() => triggerExploreModel(true)}
+            >
+              Click To Explore
+            </Button>
+          </motion.div>
+        )}
+      </Box>
+      {/* End click to explore */}
     </Box>
   );
 }

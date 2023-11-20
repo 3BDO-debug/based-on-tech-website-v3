@@ -32,15 +32,12 @@ import siyl from "@/assets/clients/siyl.png";
 
 // -------------------------------------------------------------------------------------
 
-const ClientImage = ({ src, invert }) => {
+const ClientImage = ({ src, invert, width, height }) => {
   return (
     <Box
       sx={{
-        height: {
-          xs: 60,
-          md: 60,
-        },
-        width: "100%",
+        height: height,
+        width: width,
         position: "relative",
         bgcolor: "transparent",
       }}
@@ -142,10 +139,9 @@ function HeroContent() {
         </Grid>
         <Grid item xs={12}>
           <Typography align={isMobile ? "center" : "left"}>
-            <strong>Based On Tech</strong>: Unleashing creativity in software
-            development to solve complex challenges and fuel business growth. We
-            transform your ideas into impactful, custom solutions that pave the
-            way for your success.
+            <strong>Based On Tech</strong>: Empowering success through creative
+            software solutions, transforming ideas into impactful business
+            innovations
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -201,6 +197,7 @@ function HeroContent() {
         <Grid item xs={12}>
           <Grid
             container
+            alignItems="center"
             sx={{
               px: {
                 xs: 3,
@@ -211,19 +208,39 @@ function HeroContent() {
             spacing={isMobile ? 3 : 2}
           >
             <Grid item xs={4} md={2}>
-              <ClientImage src={informa} />
+              <ClientImage
+                src={informa}
+                width={isMobile ? 60 : 90}
+                height={isMobile ? 60 : 90}
+              />
             </Grid>
             <Grid item xs={4} md={2}>
-              <ClientImage src={cairoRunners} />
+              <ClientImage
+                src={cairoRunners}
+                width={isMobile ? 60 : 90}
+                height={isMobile ? 60 : 90}
+              />
             </Grid>
             <Grid item xs={4} md={2}>
-              <ClientImage src={bistroBox} />
+              <ClientImage
+                src={bistroBox}
+                width={isMobile ? 90 : 120}
+                height={isMobile ? 90 : 120}
+              />
             </Grid>
             <Grid item xs={4} md={2}>
-              <ClientImage src={coachSama} />
+              <ClientImage
+                src={coachSama}
+                width={isMobile ? 90 : 120}
+                height={isMobile ? 90 : 120}
+              />
             </Grid>
             <Grid item xs={4} md={2}>
-              <ClientImage src={siyl} />
+              <ClientImage
+                src={siyl}
+                width={isMobile ? 90 : 120}
+                height={isMobile ? 90 : 120}
+              />
             </Grid>
           </Grid>
         </Grid>

@@ -2992,13 +2992,6 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-tsparticles@^2.12.2:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/react-tsparticles/-/react-tsparticles-2.12.2.tgz#679054f229650db8398a646e2bb1c4a750f2a7de"
-  integrity sha512-/nrEbyL8UROXKIMXe+f+LZN2ckvkwV2Qa+GGe/H26oEIc+wq/ybSG9REDwQiSt2OaDQGu0MwmA4BKmkL6wAWcA==
-  dependencies:
-    tsparticles-engine "^2.12.0"
-
 react-use-measure@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-use-measure/-/react-use-measure-2.1.1.tgz#5824537f4ee01c9469c45d5f7a8446177c6cc4ba"
