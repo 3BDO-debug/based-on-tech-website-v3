@@ -61,8 +61,7 @@ function HeroBanner() {
       }}
       ref={ref}
     >
-      {inView && <HeroExperience />}
-      {/* Hero Overlay */}
+      <HeroExperience /> {/* Hero Overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -102,7 +101,6 @@ function HeroBanner() {
           <HeroContent />
         </Box>
       )}
-
       {/* Click To Explore */}
       <Box
         sx={{

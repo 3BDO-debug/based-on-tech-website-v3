@@ -37,6 +37,7 @@ function ModelLoadingScreen() {
         <Lottie
           style={{ width: 800, height: "auto" }}
           animationData={experienceLoader}
+          
         />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
