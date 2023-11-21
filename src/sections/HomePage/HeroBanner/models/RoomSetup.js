@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+// Recoil
+import { useRecoilValue } from "recoil";
 // React three drei
 import { useGLTF, useTexture } from "@react-three/drei";
 // Three js
 import * as THREE from "three";
+// React three fibers
+import { useFrame } from "@react-three/fiber";
+// atoms
+import { exploreHeroModelAtom } from "@/recoil/atoms";
 
 // ---------------------------------------------------------------------------
 
-function RoomSetup(props) {
+function RoomSetup({ isMobile, ...props }) {
+  const group = useRef();
+
   const { nodes, materials } = useGLTF("/models/room-scene/room-setup.glb");
+
+  const exploreHeroModel = useRecoilValue(exploreHeroModelAtom);
 
   const roomSetupTexture = useTexture("/textures/room-scene/room-setup.jpg");
   roomSetupTexture.flipY = false;
@@ -45,8 +55,33 @@ function RoomSetup(props) {
     color: "#3CC0FF",
   });
 
+  const targetY = useRef(0); // Store the target Y position
+
+  // Update the target Y position based on conditions
+  useEffect(() => {
+    if (isMobile && !exploreHeroModel) {
+      targetY.current = -2.5;
+    } else if (isMobile && exploreHeroModel) {
+      targetY.current = 0.2;
+    } else {
+      // Default position when not on mobile or other conditions
+      targetY.current = 0;
+    }
+  }, [isMobile, exploreHeroModel]);
+
+  // Animate the position on each frame
+  useFrame(() => {
+    if (group.current) {
+      // Interpolate current position with the target position for smooth animation
+      group.current.position.lerp(
+        new THREE.Vector3(0, targetY.current, 0),
+        0.1
+      );
+    }
+  });
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group position={[-0.314, 0.442, 0.562]} rotation={[Math.PI, 0, Math.PI]}>
         <mesh
           geometry={nodes.BottleBase.geometry}

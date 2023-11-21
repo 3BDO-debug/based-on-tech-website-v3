@@ -118,10 +118,10 @@ function HeroExperience() {
           </Suspense>
           {/* 3D Model */}
           <Suspense fallback={<>Loading room model</>}>
-            <BasicSceneModel />
+            <BasicSceneModel isMobile={isMobile} />
           </Suspense>
           <Suspense fallback={<>Loading room setup model</>}>
-            <RoomSetup />
+            <RoomSetup isMobile={isMobile} />
           </Suspense>
           <Suspense fallback={<>Loading rubiks cube</>}>
             <RubiksCube />

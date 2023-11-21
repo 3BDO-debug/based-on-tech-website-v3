@@ -1,20 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 // React three drei
 import { useGLTF, useTexture } from "@react-three/drei";
 // Three js
 import * as THREE from "three";
+// React three fibers
+import { useFrame } from "@react-three/fiber";
 // recoil
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 // atoms
-import { heroBannerSceneLoadingAtom } from "@/recoil/atoms";
+import {
+  exploreHeroModelAtom,
+  heroBannerSceneLoadingAtom,
+} from "@/recoil/atoms";
 
 // --------------------------------------------------------------------------------
 
-function BasicSceneModel(props) {
+function BasicSceneModel({ isMobile, ...props }) {
+  const group = useRef();
+
   const { nodes, materials } = useGLTF("models/room-scene/basic-scene.glb");
 
   const basicSceneTexture = useTexture("/textures/room-scene/basic-scene.jpg");
   basicSceneTexture.flipY = false;
+
+  const exploreHeroModel = useRecoilValue(exploreHeroModelAtom);
 
   const basicSceneLightmap = useTexture(
     "/textures/room-scene/basic-scene-lightmap.jpg"
@@ -36,12 +45,37 @@ function BasicSceneModel(props) {
     heroBannerSceneLoadingAtom
   );
 
+  const targetY = useRef(0); // Store the target Y position
+
+  // Update the target Y position based on conditions
+  useEffect(() => {
+    if (isMobile && !exploreHeroModel) {
+      targetY.current = -2.5;
+    } else if (isMobile && exploreHeroModel) {
+      targetY.current = 0.2;
+    } else {
+      // Default position when not on mobile or other conditions
+      targetY.current = 0;
+    }
+  }, [isMobile, exploreHeroModel]);
+
+  // Animate the position on each frame
+  useFrame(() => {
+    if (group.current) {
+      // Interpolate current position with the target position for smooth animation
+      group.current.position.lerp(
+        new THREE.Vector3(0, targetY.current, 0),
+        0.1
+      );
+    }
+  });
+
   useEffect(() => {
     setheroBannerModelLoaded({ loaded: true, progress: 100 });
   }, []);
 
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <mesh
         geometry={nodes.World_Ground.geometry}
         material={basicSceneMaterial}
