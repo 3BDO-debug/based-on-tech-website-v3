@@ -3,7 +3,7 @@ import React, { useCallback, useRef, useState } from "react";
 // next
 import Image from "next/image";
 // recoil
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 // Yup
 import * as Yup from "yup";
 // Formik
@@ -29,14 +29,14 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 // atoms
-import { contactUsPopUpAtom } from "@/recoil/atoms";
+import { alertAtom, contactUsPopUpAtom } from "@/recoil/atoms";
+// __apis__
+import { contactUsRequest } from "@/__apis__/contactUs";
 // assets
 import contactUsIllustration from "@/assets/contact-us-pop-up-illustration.jpg";
 //
 import Scrollbar from "./Scrollbar";
 import MuiPhoneInput from "./MuiPhoneInput";
-
-// -----------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------
 
@@ -47,6 +47,8 @@ function ContactUsPopUp() {
     useRecoilState(contactUsPopUpAtom);
 
   const [reachedBottom, setReachedBottom] = useState(false);
+
+  const triggerAlert = useSetRecoilState(alertAtom);
 
   const handleScroll = (event) => {
     const target = event.currentTarget;
@@ -60,7 +62,7 @@ function ContactUsPopUp() {
       firstName: "",
       lastName: "",
       email: "",
-      phoneNumber: "",
+      phoneNumber: "+201010101010",
       message: "",
     },
     validationSchema: Yup.object().shape({
@@ -78,15 +80,37 @@ function ContactUsPopUp() {
         .max(100, "Email must be less than 100 characters"),
 
       phoneNumber: Yup.string()
-        .required("Phone number is required")
-        .matches(/^[0-9]+$/, "Phone number must be only digits")
-        .min(10, "Phone number must be at least 10 digits")
-        .max(15, "Phone number must be less than 15 digits"),
-
+        .matches(
+          /^\+(?:[0-9] ?){6,14}[0-9]$/,
+          "Must be a valid international phone number"
+        )
+        .required("Whatsapp Number Is Required"),
       message: Yup.string()
         .required("Message is required")
         .min(20, "Message must be at least 20 characters long"),
     }),
+    onSubmit: async (values, { resetForm }) => {
+      await contactUsRequest(values)
+        .then(() => {
+          triggerAlert({
+            triggered: true,
+            type: "success",
+            message:
+              "We have recieved your message, and we will contact you within 24 hours.",
+          });
+          resetForm();
+          closeHandler();
+        })
+        .catch((error) => {
+          console.log("Error submitting contact us form", error);
+          triggerAlert({
+            triggered: true,
+            type: "error",
+            message:
+              "Something wrong happened while proceeding your request, please reach us via (Phone call, whatsapp or Email Us).",
+          });
+        });
+    },
   });
 
   const {
@@ -97,6 +121,7 @@ function ContactUsPopUp() {
     errors,
     handleSubmit,
     isSubmitting,
+    dirty,
   } = formik;
 
   const closeHandler = useCallback(() => {
@@ -227,9 +252,8 @@ function ContactUsPopUp() {
                         label="Phone Number"
                         value={values.phoneNumber}
                         onChange={(event) =>
-                          setFieldValue("phoneNumber", event.target.value)
+                          setFieldValue("phoneNumber", event)
                         }
-                        {...getFieldProps("phoneNumber")}
                         error={
                           touched.phoneNumber && Boolean(errors.phoneNumber)
                         }
@@ -352,6 +376,9 @@ function ContactUsPopUp() {
                     endIcon={<Icon icon="line-md:telegram" />}
                     variant="contained"
                     sx={{ ml: 2 }}
+                    disabled={!dirty}
+                    loading={isSubmitting}
+                    onClick={handleSubmit}
                   >
                     Send
                   </LoadingButton>

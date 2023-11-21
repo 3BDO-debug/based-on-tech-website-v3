@@ -13,6 +13,7 @@ import ContactUsPopUp from "@/components/ContactUsPopUp";
 import ReachUsPopUp from "@/components/ReachUsPopUp";
 import StartProjectPopUp from "@/components/StartProjectPopUp";
 import ModelLoadingScreen from "@/components/ModelLoadingScreen";
+import Alert from "@/components/Alert";
 
 // ----------------------------------------------------------------------------------------------------
 
@@ -40,6 +41,9 @@ export default function RootLayout({ children }) {
             {/* End start project pop up */}
             {/* Home page 3d model loader */}
             {pathname === "/" && <ModelLoadingScreen />}
+            {/* Alert pop up */}
+            <Alert />
+            {/* End alert pop up */}
           </Box>
         </RootStyleRegistry>
       </body>
