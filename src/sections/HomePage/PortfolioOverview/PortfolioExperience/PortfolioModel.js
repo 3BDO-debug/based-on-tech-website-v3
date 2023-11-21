@@ -197,6 +197,7 @@ function PortfolioModel(props) {
         scale={4.243}
       />
       <mesh
+        onClick={() => handleLinkMeshClick("https://hollandegyptiancompany.com")}
         geometry={nodes.HEC.geometry}
         material={emissionText}
         position={[7.83, 6.477, 8.399]}
@@ -204,6 +205,7 @@ function PortfolioModel(props) {
         scale={0.543}
       />
       <mesh
+        onClick={() => handleLinkMeshClick("https://cairorunners.com")}
         geometry={nodes.Cairo_Runners.geometry}
         material={emissionText}
         position={[7.83, 6.477, -1.881]}
@@ -211,6 +213,7 @@ function PortfolioModel(props) {
         scale={0.543}
       />
       <mesh
+        onClick={() => handleLinkMeshClick("https://coachsama.net")}
         geometry={nodes.csc.geometry}
         material={emissionText}
         position={[4.02, 1.494, -8]}
@@ -218,6 +221,7 @@ function PortfolioModel(props) {
         scale={0.543}
       />
       <mesh
+        onClick={() => handleLinkMeshClick("https://informa-180.com")}
         geometry={nodes.informa.geometry}
         material={emissionText}
         position={[-4.107, 1.494, -8]}
@@ -225,6 +229,7 @@ function PortfolioModel(props) {
         scale={0.543}
       />
       <mesh
+        onClick={() => handleLinkMeshClick("https://instaglowing.com")}
         geometry={nodes.instaglowing.geometry}
         material={emissionText}
         position={[-8, 6.477, -2.193]}
