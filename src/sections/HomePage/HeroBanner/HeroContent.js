@@ -122,7 +122,7 @@ function HeroContent() {
                   bottom: "0",
                   left: "0",
                   background: "linear-gradient(to right, #7675FD, #40FFEF)",
-                  height: "10px",
+                  height: { xs: "4px", md: "10px" },
                   borderRadius: 4,
                 }}
               />
