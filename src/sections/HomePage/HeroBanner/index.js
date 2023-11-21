@@ -141,11 +141,11 @@ function HeroBanner() {
           >
             <Button
               size="large"
-              variant="outlined"
+              variant="contained"
               startIcon={<Icon icon="icon-park-outline:click-tap" />}
               onClick={() => triggerExploreModel(true)}
             >
-              Click To Explore
+              Explore 3D Model
             </Button>
           </motion.div>
         )}
