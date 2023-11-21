@@ -49,7 +49,7 @@ function HeroBanner() {
     hidden: { opacity: 0, scale: 0, transition: { duration: 0.5 } },
   };
 
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({ threshold: 0.8 });
 
   return (
     <Box
@@ -83,7 +83,8 @@ function HeroBanner() {
             width: {
               xs: "100vw",
               md: "75vw",
-              xl: "50vw",
+              lg: "50vw",
+              xl: "40vw",
             },
 
             top: {

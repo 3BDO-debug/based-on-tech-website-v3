@@ -122,7 +122,8 @@ function HeroContent() {
                   bottom: "0",
                   left: "0",
                   background: "linear-gradient(to right, #7675FD, #40FFEF)",
-                  height: "4px",
+                  height: "10px",
+                  borderRadius: 4,
                 }}
               />
               <Typography
@@ -213,41 +214,41 @@ function HeroContent() {
               },
               mt: 3,
             }}
-            spacing={isMobile ? 3 : 2}
+            spacing={isMobile ? 3 : 4}
           >
             <Grid item xs={4} md={2}>
               <ClientImage
                 src={informa}
-                width={isMobile ? 60 : 90}
-                height={isMobile ? 60 : 90}
+                width={isMobile ? 60 : 80}
+                height={isMobile ? 60 : 80}
               />
             </Grid>
             <Grid item xs={4} md={2}>
               <ClientImage
                 src={cairoRunners}
-                width={isMobile ? 60 : 90}
-                height={isMobile ? 60 : 90}
+                width={isMobile ? 60 : 80}
+                height={isMobile ? 60 : 80}
               />
             </Grid>
             <Grid item xs={4} md={2}>
               <ClientImage
                 src={bistroBox}
-                width={isMobile ? 90 : 120}
-                height={isMobile ? 90 : 120}
+                width={isMobile ? 90 : 80}
+                height={isMobile ? 90 : 80}
               />
             </Grid>
             <Grid item xs={4} md={2}>
               <ClientImage
                 src={coachSama}
-                width={isMobile ? 90 : 120}
-                height={isMobile ? 90 : 120}
+                width={isMobile ? 90 : 80}
+                height={isMobile ? 90 : 80}
               />
             </Grid>
             <Grid item xs={4} md={2}>
               <ClientImage
                 src={siyl}
-                width={isMobile ? 90 : 120}
-                height={isMobile ? 90 : 120}
+                width={isMobile ? 90 : 80}
+                height={isMobile ? 90 : 80}
               />
             </Grid>
           </Grid>
