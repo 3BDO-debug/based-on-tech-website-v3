@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // Next
 import Image from "next/image";
 // Iconify
@@ -15,11 +15,15 @@ import {
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 // assets
 import quickIntroCover from "@/assets/quick-intro.jpg";
+//
+import IntroVideoPopUp from "@/components/IntroVideoPopUp";
 
 // -----------------------------------------------------------------
 
 function QuickIntro() {
   const theme = useTheme();
+
+  const [introVideoPopUp, triggerIntroVideoPopUp] = useState(false);
 
   return (
     <Box sx={{ py: 12 }}>
@@ -53,7 +57,7 @@ function QuickIntro() {
               height: "100%",
             }}
           >
-            <Typography variant="h2">Our Story</Typography>
+            <Typography variant="h2">Secret Video</Typography>
             <Box
               sx={{
                 backgroundColor: theme.palette.primary.main,
@@ -67,7 +71,7 @@ function QuickIntro() {
                 my: 4,
               }}
             >
-              <IconButton>
+              <IconButton onClick={() => triggerIntroVideoPopUp(true)}>
                 <Icon
                   color={theme.palette.grey[200]}
                   width={45}
@@ -95,6 +99,12 @@ function QuickIntro() {
           />
         </Card>
       </Container>
+      {/* Intro video pop up */}
+      <IntroVideoPopUp
+        isTriggered={introVideoPopUp}
+        closeHandler={() => triggerIntroVideoPopUp(false)}
+      />
+      {/* End intro video pop up */}
     </Box>
   );
 }

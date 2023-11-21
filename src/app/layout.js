@@ -3,6 +3,7 @@
 import RootStyleRegistry from "./emotion";
 // Next
 import { usePathname } from "next/navigation";
+import Head from "next/head";
 // @Mui
 import { Box } from "@mui/material";
 
@@ -22,6 +23,22 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <Head>
+        <title>Based On Tech - Creative Software Solutions</title>
+        <meta
+          name="description"
+          content="Based On Tech is a creative software development startup specializing in developing custom immersive software solutions to help businesses scale. Our services include 3D website development, web and mobile app development, custom software solutions, and branding."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content="software development, web development, mobile app development, 3D website, custom software, branding"
+        />
+        <meta name="author" content="Based On Tech" />
+        <link rel="icon" href="/favicon.ico" />{" "}
+        {/* Update the favicon path if needed */}
+        {/* Add any other meta tags as needed */}
+      </Head>
       <body>
         <RootStyleRegistry>
           <Box

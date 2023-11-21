@@ -6,9 +6,6 @@ import { useSetRecoilState } from "recoil";
 // Iconify
 import { Icon } from "@iconify/react";
 // @Mui
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import {
   Box,
   Drawer,
@@ -69,15 +66,43 @@ function SideDrawer({ isTriggered, closeHandler, navLinks }) {
         <div
           style={{ display: "flex", justifyContent: "center", padding: "16px" }}
         >
-          <IconButton aria-label="Facebook">
-            <FacebookIcon />
-          </IconButton>
-          <IconButton aria-label="Twitter">
-            <TwitterIcon />
-          </IconButton>
-          <IconButton aria-label="LinkedIn">
-            <LinkedInIcon />
-          </IconButton>
+          <Box marginRight={1}>
+            <IconButton
+              onClick={() => window.open("https://www.facebook.com/Based.On.T")}
+            >
+              <Icon icon="logos:facebook" width={30} height={30} />
+            </IconButton>
+          </Box>
+
+          <Box marginRight={1}>
+            <IconButton
+              onClick={() =>
+                window.open("https://www.instagram.com/based_on_tech/")
+              }
+            >
+              <Icon icon="skill-icons:instagram" width={30} height={30} />
+            </IconButton>
+          </Box>
+          <Box marginRight={1}>
+            <IconButton
+              onClick={() =>
+                window.open("https://www.linkedin.com/company/basedontech/")
+              }
+            >
+              <Icon icon="skill-icons:linkedin" width={30} height={30} />
+            </IconButton>
+          </Box>
+          <Box marginRight={1}>
+            <IconButton
+              onClick={() =>
+                window.open(
+                  "https://www.youtube.com/channel/UCtZVorrnQDOzmhgCox7C-nQ/"
+                )
+              }
+            >
+              <Icon icon="logos:youtube-icon" width={30} height={30} />
+            </IconButton>
+          </Box>
         </div>
 
         <Divider />

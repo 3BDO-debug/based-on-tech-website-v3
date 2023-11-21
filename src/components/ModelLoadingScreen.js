@@ -37,10 +37,11 @@ function ModelLoadingScreen() {
         <Lottie
           style={{ width: 800, height: "auto" }}
           animationData={experienceLoader}
-          
         />
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", textAlign: "center" }}
+      >
         <Typography color="grey.400" variant="subtitle2">
           “Creativity is a wild mind and a disciplined eye.”
         </Typography>

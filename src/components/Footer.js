@@ -14,10 +14,9 @@ import {
   IconButton,
   useTheme,
 } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+// Iconify
+import { Icon } from "@iconify/react";
+//
 import Logo from "./Logo";
 
 // ----------------------------------------------------------------------
@@ -97,29 +96,42 @@ export default function Footer() {
                 <Box marginRight={1}>
                   <IconButton
                     onClick={() =>
-                      window.open("https://www.facebook.com/CoachSama/")
+                      window.open("https://www.facebook.com/Based.On.T")
                     }
                   >
-                    <FacebookIcon sx={{ color: "#3b5998" }} />
+                    <Icon icon="logos:facebook" width={40} height={40} />
                   </IconButton>
                 </Box>
 
                 <Box marginRight={1}>
                   <IconButton
                     onClick={() =>
-                      window.open("https://www.instagram.com/coach.sama/")
+                      window.open("https://www.instagram.com/based_on_tech/")
                     }
                   >
-                    <InstagramIcon sx={{ color: "#833AB4" }} />
+                    <Icon icon="skill-icons:instagram" width={40} height={40} />
                   </IconButton>
                 </Box>
                 <Box marginRight={1}>
                   <IconButton
                     onClick={() =>
-                      window.open("https://www.youtube.com/@coachsama")
+                      window.open(
+                        "https://www.linkedin.com/company/basedontech/"
+                      )
                     }
                   >
-                    <YouTubeIcon sx={{ color: "#c4302b" }} />
+                    <Icon icon="skill-icons:linkedin" width={40} height={40} />
+                  </IconButton>
+                </Box>
+                <Box marginRight={1}>
+                  <IconButton
+                    onClick={() =>
+                      window.open(
+                        "https://www.youtube.com/channel/UCtZVorrnQDOzmhgCox7C-nQ/"
+                      )
+                    }
+                  >
+                    <Icon icon="logos:youtube-icon" width={40} height={40} />
                   </IconButton>
                 </Box>
               </Stack>

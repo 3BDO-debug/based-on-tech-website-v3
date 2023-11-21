@@ -90,7 +90,7 @@ function ContactUsPopUp() {
         .min(20, "Message must be at least 20 characters long"),
     }),
     onSubmit: async (values, { resetForm }) => {
-      await contactUsRequest(values)
+      await contactUsRequest({ ...values, variant: contactUsPopUp.variant })
         .then(() => {
           triggerAlert({
             triggered: true,

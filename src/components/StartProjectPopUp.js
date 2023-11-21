@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 // Recoil
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 // Framer
 import { motion } from "framer-motion";
 // Lottie
@@ -32,7 +32,9 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 // atoms
-import { startProjectPopUpAtom } from "@/recoil/atoms";
+import { alertAtom, startProjectPopUpAtom } from "@/recoil/atoms";
+// __apis__
+import { startProjectRequest } from "@/__apis__/projectRequest";
 // assets
 import startProjectAnimation from "@/assets/animations/start-project.json";
 import Scrollbar from "./Scrollbar";
@@ -55,6 +57,8 @@ function StartProjectPopUp() {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const triggerAlert = useSetRecoilState(alertAtom);
+
   const scrollRef = useRef();
 
   const formik = useFormik({
@@ -62,7 +66,7 @@ function StartProjectPopUp() {
       firstName: "",
       lastName: "",
       email: "",
-      phoneNumber: "",
+      phoneNumber: "+201010101010",
       projectField: "",
       projectBudget: "",
       projectDescription: "",
@@ -77,13 +81,40 @@ function StartProjectPopUp() {
       email: Yup.string()
         .required("Email is required")
         .email("Invalid email format"),
-      phoneNumber: Yup.string().required("Phone Number is required"),
+      phoneNumber: Yup.string()
+        .matches(
+          /^\+(?:[0-9] ?){6,14}[0-9]$/,
+          "Must be a valid international phone number"
+        )
+        .required("Whatsapp Number Is Required"),
       projectField: Yup.string().required("Project Field is required"),
       projectBudget: Yup.string().required("Project Budget is required"),
       projectDescription: Yup.string()
         .required("Project Description is required")
         .min(20, "Project Description must be at least 20 characters"),
     }),
+    onSubmit: async (values, { resetForm }) => {
+      await startProjectRequest(values)
+        .then((response) => {
+          triggerAlert({
+            triggered: true,
+            type: "success",
+            message:
+              "We have recieved your project request, we will reply within 24 hours!.",
+          });
+          resetForm();
+          closeHandler();
+        })
+        .catch((error) => {
+          console.log("Error submitting project request form", error);
+          triggerAlert({
+            triggered: true,
+            type: "error",
+            message:
+              "Something wrong happened while proceeding your request, please reach us via (Phone call, whatsapp or Email Us).",
+          });
+        });
+    },
   });
 
   const {
@@ -116,7 +147,6 @@ function StartProjectPopUp() {
 
   const handleScrollDownForm = () => {
     if (scrollRef.current) {
-      console.log("caught scoll");
       // Scroll down by 100px, or adjust as needed
       scrollRef.current.scrollBy({ top: 100, behavior: "smooth" });
     }
@@ -219,10 +249,7 @@ function StartProjectPopUp() {
                     <MuiPhoneInput
                       label="Phone Number"
                       value={values.phoneNumber}
-                      onChange={(event) =>
-                        setFieldValue("phoneNumber", event.target.value)
-                      }
-                      {...getFieldProps("phoneNumber")}
+                      onChange={(event) => setFieldValue("phoneNumber", event)}
                       error={touched.phoneNumber && Boolean(errors.phoneNumber)}
                       helperText={touched.phoneNumber && errors.phoneNumber}
                       InputProps={{
@@ -458,6 +485,9 @@ function StartProjectPopUp() {
             endIcon={<Icon icon="line-md:telegram" />}
             variant="contained"
             sx={{ ml: 2 }}
+            onClick={handleSubmit}
+            loading={isSubmitting}
+            disabled={!dirty}
           >
             Send
           </LoadingButton>{" "}

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// http://127.0.0.1:5000 https://cairorunners-b4c844cfd7c6.herokuapp.com xx
+// http://127.0.0.1:5000 https://basedontech-a0d694488b6c.herokuapp.com/
 
-export const mainUrl = "http://127.0.0.1:5000";
+export const mainUrl = "https://basedontech-a0d694488b6c.herokuapp.com/";
 
 const axiosInstance = axios.create({
   baseURL: mainUrl,
