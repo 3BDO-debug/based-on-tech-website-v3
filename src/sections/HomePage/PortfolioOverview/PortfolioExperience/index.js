@@ -86,8 +86,8 @@ const PortfolioExperience = () => {
       <Suspense fallback={<CircularProgress />}>
         <Canvas
           style={{ height: "70vh", width: "100vw" }}
-          pixelRatio={window.devicePixelRatio}
-          gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}
+          pixelRatio={1}
+          gl={{ antialias: false, toneMapping: THREE.NoToneMapping }}
         >
           <OrbitControls
             ref={controlsRef}

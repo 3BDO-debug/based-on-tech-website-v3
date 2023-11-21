@@ -166,7 +166,7 @@ function HeroExperience() {
       <Suspense fallback={<>Loading 3d scene</>}>
         <Canvas
           ref={canvasRef}
-          pixelratio={isMobile ? 1 : 3}
+          pixelratio={1}
           dpr={dpr}
           style={{
             backgroundColor: "#161C24",
