@@ -31,6 +31,7 @@ function ModelLoadingScreen() {
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "#101B21",
+        overflow: "hidden",
       }}
     >
       <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>

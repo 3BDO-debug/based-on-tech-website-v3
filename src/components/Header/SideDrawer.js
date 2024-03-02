@@ -18,7 +18,7 @@ import {
   styled,
 } from "@mui/material";
 // atoms
-import { contactUsPopUpAtom } from "@/recoil/atoms";
+import { contactUsPopUpAtom, startProjectPopUpAtom } from "@/recoil/atoms";
 //
 import Logo from "../Logo";
 
@@ -32,6 +32,8 @@ function SideDrawer({ isTriggered, closeHandler, navLinks }) {
   }));
 
   const triggerContactUsPopUp = useSetRecoilState(contactUsPopUpAtom);
+
+  const triggerStartProjectPopUp = useSetRecoilState(startProjectPopUpAtom);
 
   return (
     <Drawer anchor="left" open={isTriggered} onClose={closeHandler}>
@@ -115,10 +117,7 @@ function SideDrawer({ isTriggered, closeHandler, navLinks }) {
             startIcon={<Icon icon="ion:rocket-outline" />}
             size="medium"
             onClick={() => {
-              triggerContactUsPopUp({
-                isTriggered: true,
-                variant: "General Inquiry",
-              });
+              triggerStartProjectPopUp(true);
             }}
           >
             Start Project

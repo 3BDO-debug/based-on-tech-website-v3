@@ -189,7 +189,7 @@ function ContactUsPopUp() {
       maxWidth="lg"
       fullWidth
     >
-      <Paper sx={{ height: "100%", overflowY: { xs: "hidden" } }}>
+      <Paper sx={{ height: "100%", overflowY: { xs: "auto" } }}>
         <Grid container height="100%" alignItems="center">
           <Grid item xs={12} md={6}>
             <Box
