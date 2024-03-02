@@ -111,56 +111,55 @@ function HeroBanner() {
         </Box>
       )}
       {/* Click To Explore */}
-      {!startProjectPopUp ||
-        (!contactUsPopUp && (
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              zIndex: 10000,
-              position: !inView ? "sticky" : "fixed",
-              bottom: "0vh",
-              height: "10vh",
-            }}
-          >
-            {exploreHeroModel ? (
-              <motion.div
-                key="closeButton"
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={buttonVariants}
+      {!startProjectPopUp && !contactUsPopUp.isTriggered && (
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            zIndex: 10000,
+            position: !inView ? "sticky" : "fixed",
+            bottom: "0vh",
+            height: "10vh",
+          }}
+        >
+          {exploreHeroModel ? (
+            <motion.div
+              key="closeButton"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={buttonVariants}
+            >
+              <IconButton onClick={() => triggerExploreModel(false)}>
+                <Icon
+                  color={theme.palette.error.light}
+                  width={60}
+                  height={60}
+                  icon="solar:close-circle-broken"
+                />
+              </IconButton>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="exploreButton"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={buttonVariants}
+            >
+              <Button
+                size="large"
+                variant="contained"
+                startIcon={<Icon icon="icon-park-outline:click-tap" />}
+                onClick={() => triggerExploreModel(true)}
               >
-                <IconButton onClick={() => triggerExploreModel(false)}>
-                  <Icon
-                    color={theme.palette.error.light}
-                    width={60}
-                    height={60}
-                    icon="solar:close-circle-broken"
-                  />
-                </IconButton>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="exploreButton"
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={buttonVariants}
-              >
-                <Button
-                  size="large"
-                  variant="contained"
-                  startIcon={<Icon icon="icon-park-outline:click-tap" />}
-                  onClick={() => triggerExploreModel(true)}
-                >
-                  Explore 3D Model
-                </Button>
-              </motion.div>
-            )}
-          </Box>
-        ))}
+                Explore 3D Model
+              </Button>
+            </motion.div>
+          )}
+        </Box>
+      )}
       {/* End click to explore */}
     </Box>
   );
