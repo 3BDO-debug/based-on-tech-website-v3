@@ -436,6 +436,39 @@ function StartProjectPopUp() {
               {/* End Form Fields */}
             </Grid>
           </Grid>
+          <Grid item xs={12}>
+            <Paper
+              sx={{
+                position: { xs: "sticky", md: "absolute" },
+                zIndex: 10,
+                bottom: { xs: "0vh", md: "0vh" },
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                px: 4,
+                py: 2,
+              }}
+            >
+              <Button
+                onClick={closeHandler}
+                variant="outlined"
+                color="error"
+                endIcon={<Icon icon="line-md:menu-to-close-alt-transition" />}
+              >
+                Cancel
+              </Button>
+              <LoadingButton
+                endIcon={<Icon icon="line-md:telegram" />}
+                variant="contained"
+                sx={{ ml: 2 }}
+                onClick={handleSubmit}
+                loading={isSubmitting}
+                disabled={!dirty}
+              >
+                Send
+              </LoadingButton>{" "}
+            </Paper>
+          </Grid>
         </Grid>
         {!reachedBottom && (
           <Box
@@ -445,7 +478,7 @@ function StartProjectPopUp() {
               display: { xs: "flex", md: "none" },
               position: "sticky",
               right: 0,
-              bottom: "10vh",
+              bottom: "2vh",
               zIndex: 1000000,
               width: "100%",
               justifyContent: "center",
@@ -461,37 +494,6 @@ function StartProjectPopUp() {
             </IconButton>
           </Box>
         )}
-        <Paper
-          sx={{
-            position: { xs: "sticky", md: "absolute" },
-            zIndex: 10,
-            bottom: { xs: "0vh", md: "3vh" },
-            width: "100%",
-            display: "flex",
-            justifyContent: "flex-end",
-            px: 4,
-            py: 2,
-          }}
-        >
-          <Button
-            onClick={closeHandler}
-            variant="outlined"
-            color="error"
-            endIcon={<Icon icon="line-md:menu-to-close-alt-transition" />}
-          >
-            Cancel
-          </Button>
-          <LoadingButton
-            endIcon={<Icon icon="line-md:telegram" />}
-            variant="contained"
-            sx={{ ml: 2 }}
-            onClick={handleSubmit}
-            loading={isSubmitting}
-            disabled={!dirty}
-          >
-            Send
-          </LoadingButton>{" "}
-        </Paper>
       </Paper>
     </Dialog>
   );

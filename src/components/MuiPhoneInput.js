@@ -10,7 +10,6 @@ function MuiPhoneInput({ value, onChange, label, ...props }) {
       fullWidth
       label={label}
       {...props}
-      defaultCountry="eg"
     />
   );
 }
