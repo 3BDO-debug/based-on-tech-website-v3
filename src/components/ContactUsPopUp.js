@@ -99,6 +99,10 @@ function ContactUsPopUp() {
         "حسبي الله", // This might be too broad, consider the implications
         "دمر",
         "حرامي",
+        "fuck",
+        "fuc",
+        "loser",
+        "los",
       ];
 
       // Function to check if the message contains any offensive word patterns using regex
