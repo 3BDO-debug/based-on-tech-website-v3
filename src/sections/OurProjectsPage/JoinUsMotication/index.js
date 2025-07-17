@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 // Recoil
 import { useSetRecoilState } from "recoil";
