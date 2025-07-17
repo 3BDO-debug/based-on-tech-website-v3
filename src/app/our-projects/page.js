@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
+import dynamic from "next/dynamic";
 // @Mui
 import { Box } from "@mui/material";
 // sections
 import HeroBanner from "@/sections/OurProjectsPage/HeroBanner";
-import ParticlesEffect from "@/components/ParticlesEffect";
+const ParticlesEffect = dynamic(() => import("@/components/ParticlesEffect"), {
+  ssr: false,
+});
 import ProjectsOverview from "@/sections/OurProjectsPage/ProjectsOverview";
 import JoinUsMotivation from "@/sections/OurProjectsPage/JoinUsMotication";
 
