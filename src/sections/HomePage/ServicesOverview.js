@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
+import dynamic from "next/dynamic";
 // @Mui
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 // Recoil
 import { useSetRecoilState } from "recoil";
 // React Lottie
-import Lottie from "lottie-react";
 // React Intersection Observer
 import { useInView } from "react-intersection-observer";
 // Framer Motion
@@ -20,6 +20,8 @@ import webDesign from "@/assets/animations/services-overview/web-design.json";
 import branding from "@/assets/animations/services-overview/branding.json";
 
 // -------------------------------------------------------------------------------------------------------
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const ServiceCard = ({ animaiton, title, reverseLayout, description }) => {
   const theme = useTheme();

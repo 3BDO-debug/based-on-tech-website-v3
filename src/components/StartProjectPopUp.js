@@ -1,11 +1,11 @@
 "use client";
 import React, { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 // Recoil
 import { useRecoilState, useSetRecoilState } from "recoil";
 // Framer
 import { motion } from "framer-motion";
 // Lottie
-import Lottie from "lottie-react";
 // Iconify
 import { Icon } from "@iconify/react";
 // Formik
@@ -41,6 +41,8 @@ import Scrollbar from "./Scrollbar";
 import MuiPhoneInput from "./MuiPhoneInput";
 
 // ------------------------------------------------------------------------------------------------------------
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 function StartProjectPopUp() {
   const theme = useTheme();
