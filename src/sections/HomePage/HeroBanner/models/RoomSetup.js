@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 // React three drei
 import { useGLTF, useTexture } from "@react-three/drei";

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 // React Three Drei
 import { useGLTF, useTexture } from "@react-three/drei";
@@ -197,7 +198,9 @@ function PortfolioModel(props) {
         scale={4.243}
       />
       <mesh
-        onClick={() => handleLinkMeshClick("https://hollandegyptiancompany.com")}
+        onClick={() =>
+          handleLinkMeshClick("https://hollandegyptiancompany.com")
+        }
         geometry={nodes.HEC.geometry}
         material={emissionText}
         position={[7.83, 6.477, 8.399]}
